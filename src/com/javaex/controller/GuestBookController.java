@@ -58,10 +58,10 @@ public class GuestBookController extends HttpServlet {
 			System.out.println("삭제");
 
 			int no = Integer.parseInt(request.getParameter("no"));
-			String password = request.getParameter("pass");
+			String pass = request.getParameter("pass");
 
 			GuestBookDao guestDao = new GuestBookDao();
-			GuestBookVo guestVo = new GuestBookVo(no, password);
+			GuestBookVo guestVo = new GuestBookVo(no, pass);
 
 			guestDao.delete(guestVo);
 
