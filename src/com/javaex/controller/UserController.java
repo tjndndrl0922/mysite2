@@ -69,7 +69,7 @@ public class UserController extends HttpServlet {
 			if (authVo == null) {
 				System.out.println("로그인 실패");
 				// 리다이렉트 --> 로그인폼
-				WebUtil.redirect(request, response, "/mysite2/User?action=loginForm");
+				WebUtil.redirect(request, response, "/mysite2/User?action=loginForm&result=fail");
 
 			} else {
 				System.out.println("로그인 성공");
@@ -93,19 +93,47 @@ public class UserController extends HttpServlet {
 		} else if ("modifyForm".equals(action)) {
 			System.out.println("회원정보 수정 폼");
 			
+			//세션에 있는 no
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			
+			int no = authUser.getNo();
+			
+			//회원정보 가져오기
+			UserDao userDao = new UserDao();
+			UserVo userVo = userDao.getUser(no);
+			
+			System.out.println("getUser(no)" + userVo);
+			
+			//userVo 전달 폼
+			request.setAttribute("userVo", userVo);
+
+			//포워드
 			WebUtil.forword(request, response, "/WEB-INF/views/user/modifyForm.jsp");
 
 		} else if("modify".equals(action)) {
 			System.out.println("회원정보 수정");
 			
-			String id = request.getParameter("id");
+			//파라미터 값 꺼내오기
 			String pw = request.getParameter("pw");
 			String name = request.getParameter("name");
 			String gender = request.getParameter("gender");
-			int no = Integer.parseInt(request.getParameter("no"));
+
+			//세션에서 no 가져오기
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			int no = authUser.getNo();
 			
+			//UserVO 로 만들기
+			UserVo userVo = new UserVo(no, pw, name, gender);
+			
+			//dao --> update() 실행
 			UserDao userDao = new UserDao();
-			UserVo userVo = new UserVo(no, pw, name, gender, id);
+			userDao.Update(userVo);
+			
+			//session의 정보도 update
+			//session의 name값만 변경
+			authUser.setName(name);
 			
 			WebUtil.redirect(request, response, "/mysite2/Main");
 		}

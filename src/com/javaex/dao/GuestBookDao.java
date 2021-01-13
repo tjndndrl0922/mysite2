@@ -59,7 +59,7 @@ public class GuestBookDao {
 		}
 		
 		//guestbook 삭제
-		public int delete(GuestBookVo Vo) {
+		public int delete(GuestBookVo vo) {
 			getConnection();
 			int count = 0;
 			try {
@@ -70,8 +70,8 @@ public class GuestBookDao {
 				query += " and password = ? ";
 
 				pstmt = conn.prepareStatement(query);
-				pstmt.setInt(1, Vo.getNo());
-				pstmt.setString(2, Vo.getPassword());
+				pstmt.setInt(1, vo.getNo());
+				pstmt.setString(2, vo.getPassword());
 				
 				count = pstmt.executeUpdate();
 				

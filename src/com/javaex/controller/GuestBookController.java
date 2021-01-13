@@ -50,8 +50,6 @@ public class GuestBookController extends HttpServlet {
 		} else if ("deleteForm".equals(action)) {
 			System.out.println("리스트 삭제 폼");
 
-			int no = Integer.parseInt(request.getParameter("no"));
-
 			WebUtil.forword(request, response, "/WEB-INF/views/guestbook/deleteForm.jsp");
 
 		} else if ("delete".equals(action)) {

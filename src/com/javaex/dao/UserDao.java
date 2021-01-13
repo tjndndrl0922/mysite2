@@ -88,6 +88,7 @@ public class UserDao {
 		return count;
 	}
 
+	//로그인할때 세션 저장용
 	public UserVo getUser(String id, String pw) {
 		getConnection();
 		UserVo userVo = null;
@@ -123,8 +124,8 @@ public class UserDao {
 		return userVo;
 	}
 
-	
-	public int getModify(UserVo userVo) {
+	// 사용자 정보 수정 메소드
+	public int Update(UserVo vo) {
 		getConnection();
 		int count = 0;
 		try {
@@ -132,18 +133,16 @@ public class UserDao {
 			
 			String query = "";
 			query += " update users ";
-			query += " set id = ?,	   ";
-			query += " 		password = ?, ";
+			query += " set  password = ?,  ";
 			query += " 		name = ?, ";
 			query += " 		gender = ? ";
 			query += " where no = ? ";
 
 			pstmt = conn.prepareStatement(query); // 쿼리로 만들기
-			pstmt.setString(1, userVo.getId());
-			pstmt.setString(2, userVo.getPassword());
-			pstmt.setString(3, userVo.getName());
-			pstmt.setString(4, userVo.getGender());
-			pstmt.setInt(5, userVo.getNo());
+			pstmt.setString(1, vo.getPassword());
+			pstmt.setString(2, vo.getName());
+			pstmt.setString(3, vo.getGender());
+			pstmt.setInt(4, vo.getNo());
 
 			count = pstmt.executeUpdate(); // 쿼리문 실행
 
@@ -156,5 +155,45 @@ public class UserDao {
 		close();
 		
 		return count;
+	}
+	
+	// 사용자 정보 가져오기(회원정보 수정시 사용)
+	public UserVo getUser(int no) {
+		getConnection();
+		UserVo userVo = null;
+		try {
+			// SQL문 준비/ 바인딩 / 실행
+			
+			String query = "";
+			query += " select no, ";
+			query += "  	  id,	   ";
+			query += "  	  password,	   ";
+			query += " 	 	  name, ";
+			query += " 		  gender ";
+			query += " from users ";
+			query += " where no = ? ";
+
+			pstmt = conn.prepareStatement(query); // 쿼리로 만들기
+			pstmt.setInt(1, no);
+
+
+			rs = pstmt.executeQuery(); // 쿼리문 실행
+
+			// 결과처리
+			while(rs.next()) {
+				int uNo = rs.getInt("no");
+				String id = rs.getString("id");
+				String password = rs.getString("password");
+				String name = rs.getString("name");
+				String gender = rs.getString("gender");
+				userVo = new UserVo(uNo, id, password, name, gender); 
+			}
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		
+		close();
+		
+		return userVo;
 	}
 }
