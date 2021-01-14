@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.javaex.vo.GuestBookVo" %>
-<%
-	List<GuestBookVo> guestList = (List<GuestBookVo>) request.getAttribute("gList"); 
-%>
+
 
 
 <!DOCTYPE html>
@@ -20,28 +18,8 @@
 <body>
 	<div id="wrap">
 
-		<div id="header">
-			<h1>
-				<a href="">MySite</a>
-			</h1>
-
-			<ul>
-				<li><a href="">로그인</a></li>
-				<li><a href="">회원가입</a></li>
-			</ul>
-		</div>
-		<!-- //header -->
-
-		<div id="nav">
-			<ul>
-				<li><a href="">방명록</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">입사지원서</a></li>
-			</ul>
-			<div class="clear"></div>
-		</div>
-		<!-- //nav -->
+			<!-- header + nav 공통으로 옮김 -->
+		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>>
 
 		<div id="aside">
 			<h2>방명록</h2>
@@ -134,29 +112,24 @@
 					</tr>
 					
 					<table class="guestRead">
-						<%
-							for (int i = 0; i < guestList.size(); i++) {
-						%>
-					<colgroup>
-							<col style="width: 10%;">
-							<col style="width: 40%;">
-							<col style="width: 40%;">
-							<col style="width: 10%;">
-					</colgroup>
-					<tr>
-						<td><%=guestList.get(i).getNo()%></td>
-						<td><%=guestList.get(i).getName()%></td>
-						<td><%=guestList.get(i).getRegDate()%></td>
-						<td><a href="/mysite2/gbc?action=deleteForm&no=<%=guestList.get(i).getNo()%>">[삭제]</a></td>
-					</tr>
-					<tr>
-						<td colspan=4 class="text-left"><%=guestList.get(i).getContent()%></td>
-					</tr>
-					
-				</table>
-				<%
-					}
-				%>	
+						<c:forEach items="${gList}" var="vo" varStatus="status">
+							<colgroup>
+									<col style="width: 10%;">
+									<col style="width: 40%;">
+									<col style="width: 40%;">
+									<col style="width: 10%;">
+							</colgroup>
+							<tr>
+								<td>${vo.no }</td>
+								<td>${vo.name }</td>
+								<td>${vo.regDate }</td>
+								<td><a href="/mysite2/gbc?action=deleteForm&no=${vo.no }">[삭제]</a></td>
+							</tr>
+							<tr>
+								<td colspan=4 class="text-left">${vo.content }</td>
+							</tr>	
+						</table>
+					</c:forEach>
 				<!-- //guestRead -->
 				
 			</div>
@@ -165,10 +138,8 @@
 		<!-- //content  -->
 		<div class="clear"></div>
 		
-		<div id="footer">
-			Copyright ⓒ 2020 황일영. All right reserved
-		</div>
-		<!-- //footer -->
+				<!-- //footer -->
+		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 
 	</div>
 	<!-- //wrap -->

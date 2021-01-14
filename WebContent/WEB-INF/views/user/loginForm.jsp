@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<% String result = request.getParameter("result"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,11 +57,11 @@
 							<input type="text" id="input-pass" name="pw" value="" placeholder="비밀번호를 입력하세요"	>
 						</div>
 						
-						<%if("fail".equals(result)) {%>
+						<c:if test="${!empty param.result}">
 						<p>
 							로그인에 실패했습니다. 다시 로그인 해주세요
 						</p>
-						<%} %>
+						</c:if>
 						<!-- 버튼영역 -->
 		                <div class="button-area">
 		                    <button type="submit" id="btn-submit">로그인</button>
