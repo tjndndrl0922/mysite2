@@ -9,32 +9,41 @@ public class BoardVo {
 	int hit;
 	String regDate;
 	int userNo;
+	String name;
 
 	// 생성자
 	public BoardVo() {
 
 	}
 
-	
-	
-	public BoardVo(String name,  int hit, String regDate, String title, String content) {
+	public BoardVo(String name, int hit, String regDate, String title, String content) {
 		super();
-		this.title = name;
+		this.name = name;
 		this.hit = hit;
 		this.regDate = regDate;
 		this.title = title;
 		this.content = content;
 	}
 
-
-
 	public BoardVo(int no, String title, String name, int hit, String regDate) {
 		super();
 		this.no = no;
 		this.title = title;
-		this.content = name;
+		this.name = name;
 		this.hit = hit;
 		this.regDate = regDate;
+	}
+
+	
+	
+	public BoardVo(int no, String name, int hit, String regDate, String title, String content) {
+		super();
+		this.no = no;
+		this.title = title;
+		this.content = content;
+		this.hit = hit;
+		this.regDate = regDate;
+		this.name = name;
 	}
 
 	public BoardVo(int no, String title, String content, int hit, String regDate, int userNo) {
@@ -94,6 +103,14 @@ public class BoardVo {
 
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	// 메소드일반

@@ -98,9 +98,10 @@ public class BoardDao {
 			
 		}
 		
-		public List<BoardVo> read(){
+		//read
+		public int read(BoardVo vo){
 			getConnection();
-			List<BoardVo> boardList = new ArrayList<BoardVo>();
+			int count = 0;
 			
 			try {
 				// SQL문 준비/ 바인딩 / 실행
@@ -112,19 +113,22 @@ public class BoardDao {
 				query += " 		  b.content ";
 				query += " FROM board b, users u ";			
 				query += " where b.user_no = u.no ";
+				query += " and u.no = ? ";
 				
 				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, vo.getNo());
 				rs = pstmt.executeQuery();
 				// 결과처리
 				while (rs.next()) {
+					int no = rs.getInt("no");
 					String name = rs.getString("name");
 					int hit = rs.getInt("hit");
 					String regDate = rs.getString("reg_date");
 					String title = rs.getString("title");
 					String content = rs.getString("content");
 					
-					BoardVo vo = new BoardVo(name, hit, regDate, title, content);
-					boardList.add(vo);
+					vo = new BoardVo(no, name, hit, regDate, title, content);
+					
 				}
 			} catch (SQLException e) {
 				System.out.println("error:" + e);
@@ -132,7 +136,8 @@ public class BoardDao {
 			// 자원정리
 			close();
 
-			return boardList;
-			
+			return count;
 		}
+		
+		
 }

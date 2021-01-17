@@ -36,13 +36,12 @@ public class BoardController extends HttpServlet {
 			
 		}else if("read".equals(action)) {
 			System.out.println("게시판 읽기");
-			
-			BoardDao boardDao = new BoardDao();
-			List<BoardVo> bList = boardDao.read();
-			
-			request.setAttribute("bList", bList);
-			
+	
 			WebUtil.forword(request, response, "/WEB-INF/views/board/read.jsp");
+			
+		}else if("insert".equals(action)) {
+			
+			
 			
 		}
 	}
