@@ -26,11 +26,11 @@ public class GuestBookController extends HttpServlet {
 		if ("addList".equals(action)) {
 			System.out.println("방명록 리스트");
 
-			GuestBookDao guestDao = new GuestBookDao();
+			GuestBookDao guestDao = new GuestBookDao();	
 			List<GuestBookVo> guestList = guestDao.getList();
 
 			request.setAttribute("gList", guestList);
-
+			
 			WebUtil.forword(request, response, "/WEB-INF/views/guestbook/addList.jsp");
 
 		} else if ("add".equals(action)) {

@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="java.util.List" %>
-<%@ page import="com.javaex.vo.GuestBookVo" %>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -18,14 +14,14 @@
 <body>
 	<div id="wrap">
 
-			<!-- header + nav 공통으로 옮김 -->
+		<!-- header + nav 공통으로 옮김 -->
 		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>>
 
 		<div id="aside">
 			<h2>방명록</h2>
 			<ul>
 				<li>일반방명록</li>
-				<li>ajax방명록</li>
+				<li>댓글방명록</li>
 			</ul>
 		</div>
 		<!-- //aside -->
@@ -74,45 +70,9 @@
 					<input type="hidden" name="action" value="add">
 					
 				</form>
-			
-				<table class="guestRead">
-					<colgroup>
-						<col style="width: 10%;">
-						<col style="width: 40%;">
-						<col style="width: 40%;">
-						<col style="width: 10%;">
-					</colgroup>
-					<tr>
-						<td>1234555</td>
-						<td>이정재</td>
-						<td>2020-03-03 12:12:12</td>
-						<td><a href="">[삭제]</a></td>
-					</tr>
-					<tr>
-						<td colspan=4 class="text-left">방명록 글입니다. 방명록 글입니다.</td>
-					</tr>
-				</table>
-				<!-- //guestRead -->
-				
-				<table class="guestRead">
-					<colgroup>
-							<col style="width: 10%;">
-							<col style="width: 40%;">
-							<col style="width: 40%;">
-							<col style="width: 10%;">
-					</colgroup>
-					<tr>
-						<td>1234555</td>
-						<td>이정재</td>
-						<td>2020-03-03 12:12:12</td>
-						<td><a href="">[삭제]</a></td>
-					</tr>
-					<tr>
-						<td colspan=4 class="text-left">방명록 글입니다. 방명록 글입니다.</td>
-					</tr>
 					
-					<table class="guestRead">
-						<c:forEach items="${gList}" var="vo" varStatus="status">
+					<c:forEach items="${gList}" var="vo" varStatus="status">
+						<table class="guestRead">
 							<colgroup>
 									<col style="width: 10%;">
 									<col style="width: 40%;">
@@ -130,6 +90,7 @@
 							</tr>	
 						</table>
 					</c:forEach>
+					
 				<!-- //guestRead -->
 				
 			</div>
@@ -138,9 +99,10 @@
 		<!-- //content  -->
 		<div class="clear"></div>
 		
-				<!-- //footer -->
+		
 		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
-
+		<!-- //footer -->
+		
 	</div>
 	<!-- //wrap -->
 

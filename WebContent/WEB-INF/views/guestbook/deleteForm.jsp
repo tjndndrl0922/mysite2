@@ -16,13 +16,13 @@
 	<div id="wrap">
 
 			<!-- header + nav 공통으로 옮김 -->
-		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>>
+		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 
 		<div id="aside">
 			<h2>방명록</h2>
 			<ul>
 				<li>일반방명록</li>
-				<li>ajax방명록</li>
+				<li>댓글방명록</li>
 			</ul>
 		</div>
 		<!-- //aside -->

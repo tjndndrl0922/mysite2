@@ -143,6 +143,7 @@ public class GuestBookDao {
 					
 					GuestBookVo vo = new GuestBookVo(no, name, password, content, regDate);
 					guestList.add(vo);
+					
 				}
 			} catch (SQLException e) {
 				System.out.println("error:" + e);
