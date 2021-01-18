@@ -3,18 +3,27 @@ package com.javaex.vo;
 public class BoardVo {
 
 	// 필드
-	int no;
-	String title;
-	String content;
-	int hit;
-	String regDate;
-	int userNo;
-	String name;
+	private int no;
+	private String title;
+	private String content;
+	private int hit;
+	private String regDate;
+	private int userNo;
+	private String name;
 
 	// 생성자
 	public BoardVo() {
 
 	}
+
+	
+	
+	public BoardVo(int userNo) {
+		super();
+		this.userNo = userNo;
+	}
+
+
 
 	public BoardVo(String name, int hit, String regDate, String title, String content) {
 		super();
