@@ -36,12 +36,22 @@ public class BoardController extends HttpServlet {
 			
 		}else if("read".equals(action)) {
 			System.out.println("게시판 읽기");
-	
+			
+			int no = Integer.parseInt(request.getParameter("no"));
+			BoardDao boardDao = new BoardDao();
+			
+			BoardVo boardVo = boardDao.getRead(no);
+			
 			WebUtil.forword(request, response, "/WEB-INF/views/board/read.jsp");
 			
+		}else if("delete".equals(action)) {
+			int userNo =  Integer.parseInt(request.getParameter("userNo"));
+			
+			BoardDao boardDao = new BoardDao();
+			
+
+			WebUtil.redirect(request, response, "/mysite2/bc?action=list");
 		}else if("insert".equals(action)) {
-			
-			
 			
 		}
 	}

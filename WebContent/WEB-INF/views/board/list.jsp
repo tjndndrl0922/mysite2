@@ -45,7 +45,7 @@
 
 			<div id="board">
 				<div id="list">
-					<form action="/mysite2/bc" method="get">
+					<form action="" method="get">
 						<div class="form-group text-right">
 							<input type="text">
 							<button type="submit" id=btn_search>검색</button>
@@ -67,11 +67,13 @@
 							<c:forEach items="${bList}" var="vo" varStatus="status">
 								<tr>
 									<td>${vo.no }</td>
-									<td class="text-left"><a href="mysite2/bc?action=read">${vo.title } </a></td>
+									<td class="text-left"><a href="/mysite2/bc?action=read&no=${vo.no }">${vo.title } </a></td>
 									<td>${vo.name } </td>
 									<td>${vo.hit } </td>
 									<td>${vo.regDate } </td>
-									<td><a href="">[삭제]</a></td>
+									<c:if test="${authUser !=null  }">
+										<td><a href="/mysite2/bc?action=delete">[삭제]</a></td>
+									</c:if>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -96,8 +98,10 @@
 						
 						<div class="clear"></div>
 					</div>
-					<a id="btn_write" href="">글쓰기</a>
-				
+					
+					<c:if test="${authUser !=null }">
+						<a id="btn_write" href="/mysite2/bc?action=writeForm&no=${author.no }">글쓰기</a>
+					</c:if>
 				</div>
 				<!-- //list -->
 			</div>

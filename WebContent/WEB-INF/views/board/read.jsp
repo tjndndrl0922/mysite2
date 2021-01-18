@@ -33,7 +33,7 @@
 				<h3>게시판</h3>
 				<div id="location">
 					<ul>
-						<li>홈</li>
+						<li>홈</li> 
 						<li>게시판</li>
 						<li class="last">일반게시판</li>
 					</ul>
@@ -48,31 +48,31 @@
 						<!-- 작성자 -->
 						<div class="form-group">
 							<span class="form-text">작성자</span>
-							<span class="form-value">${requsetScope.bList.name }</span>
+							<span class="form-value">${boardVo.name }</span>
 						</div>
 						
 						<!-- 조회수 -->
 						<div class="form-group">
 							<span class="form-text">조회수</span>
-							<span class="form-value">${requsetScope.bList.hit }</span>
+							<span class="form-value">${boardVo.hit }</span>
 						</div>
 						
 						<!-- 작성일 -->
 						<div class="form-group">
 							<span class="form-text">작성일</span>
-							<span class="form-value">${requsetScope.bList.regDate }</span>
+							<span class="form-value">${boardVo.regDate }</span>
 						</div>
 						
 						<!-- 제목 -->
 						<div class="form-group">
 							<span class="form-text">제 목</span>
-							<span class="form-value">${requsetScope.bList.title }</span>
+							<span class="form-value">${boardVo.title }</span>
 						</div>
 					
 						<!-- 내용 -->
 						<div id="txt-content">
 							<span class="form-value" >
-								${requsetScope.bList.content }<br>
+								${boardVo.content }<br>
 								여기에는 본문내용이 출력됩니다.<br>
 								여기에는 본문내용이 출력됩니다.<br>
 								여기에는 본문내용이 출력됩니다.<br>
@@ -83,8 +83,10 @@
 							</span>
 						</div>
 						
-						<a id="btn_modify" href="">수정</a>
-						<a id="btn_modify" href="">목록</a>
+						<c:if test="${authUser != null}">
+							<a id="btn_modify" href="/mysite2/bc?action=modifyForm&no=${boardVo.no }">수정</a>
+						</c:if>
+						<a id="btn_modify" href="/mysite2/bc?action=list">목록</a>
 						
 					</form>
 	                <!-- //form -->
